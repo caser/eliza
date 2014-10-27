@@ -3,7 +3,6 @@ package eliza
 import (
 	"bufio"
 	"os"
-	"reflect"
 	"strings"
 )
 

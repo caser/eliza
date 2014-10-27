@@ -1,6 +1,7 @@
 package eliza
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -16,4 +17,8 @@ func TestCheckForQuit(t *testing.T) {
 	if !CheckForQuit(quit) {
 		t.Errorf("Found no quit statement in a string with one.")
 	}
+}
+
+func TestScriptLoading(t *testing.T) {
+	fmt.Println(Keywords)
 }
