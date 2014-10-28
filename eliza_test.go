@@ -1,6 +1,8 @@
 package eliza
 
 import (
+	// "fmt"
+	"reflect"
 	"testing"
 )
 
@@ -38,4 +40,45 @@ func TestScriptLoading(t *testing.T) {
 	if _, ok := Synonyms["be"]; ok != true {
 		t.Errorf("Synonyms not getting loaded. 'be' keyword missing.")
 	}
+}
+
+func TestPreProcess(t *testing.T) {
+	// Test that PreProcess() finds words for preprocessing them and returns a new string
+	orig := "I dont think so."
+
+	parsed := ParseInput(orig)
+
+	prepd := PreProcess(parsed)
+
+	result := []string{"i", "don't", "think", "so"}
+	if !reflect.DeepEqual(prepd, result) {
+		t.Errorf("Error with preprocessing. Returned string (%v) did not match expected result (%v).", prepd, result)
+	}
+}
+
+func TestPostProcess(t *testing.T) {
+	// Test that PreProcess() finds words for preprocessing them and returns a new string
+	orig := "I love it when you quote shakespeare."
+
+	parsed := ParseInput(orig)
+
+	postd := PostProcess(parsed)
+
+	result := []string{"you", "love", "it", "when", "I", "quote", "shakespeare"}
+	if !reflect.DeepEqual(postd, result) {
+		t.Errorf("Error with post-processing. Returned string (%v) did not match expected result (%v).", postd, result)
+	}
+}
+
+func TestFindSynonym(t *testing.T) {
+
+}
+
+func TestFindKeyword(t *testing.T) {
+	// Test that it finds a keyword in a string
+
+	// Test that it returns 'xnone' when there are no keywords
+
+	// Test that it returns the keyword with the highest rank if there are
+	// multiple keywords in a string
 }

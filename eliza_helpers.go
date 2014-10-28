@@ -30,7 +30,27 @@ func CheckForQuit(parsed []string) bool {
 func ParseInput(input string) []string {
 	parsed := strings.Split(input, " ")
 	for i, word := range parsed {
-		parsed[i] = strings.Trim(word, ".! \n")
+		parsed[i] = strings.ToLower(strings.Trim(word, ".! \n"))
 	}
 	return parsed
+}
+
+func PreProcess(parsed []string) (prepd []string) {
+	prepd = parsed
+	for i, word := range parsed {
+		if processed_word, ok := Pre[word]; ok {
+			prepd[i] = processed_word
+		}
+	}
+	return prepd
+}
+
+func PostProcess(parsed []string) (postd []string) {
+	postd = parsed
+	for i, word := range parsed {
+		if processed_word, ok := Post[word]; ok {
+			postd[i] = processed_word
+		}
+	}
+	return postd
 }
