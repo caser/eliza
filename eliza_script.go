@@ -33,7 +33,10 @@ var Post = map[string]string{
 	"i'm":      "you are",
 }
 
-var Synonyms = map[string][]string{
+// this could be better as a map of synonym to keyword instead of keyword to list
+// of synonyms, but might be harder to interpret / customize
+// thus processing happens in Synonymize() method
+var SynonymMap = map[string][]string{
 	"be":       []string{"am", "is", "are", "was"},
 	"belief":   []string{"feel", "think", "believe", "wish"},
 	"cannot":   []string{"can't"},

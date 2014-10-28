@@ -37,13 +37,14 @@ func TestScriptLoading(t *testing.T) {
 	}
 
 	// Check that synonym map loading
-	if _, ok := Synonyms["be"]; ok != true {
-		t.Errorf("Synonyms not getting loaded. 'be' keyword missing.")
+	if _, ok := SynonymMap["be"]; ok != true {
+		t.Errorf("SynonymMap not getting loaded. 'be' keyword missing.")
 	}
 }
 
 func TestPreProcess(t *testing.T) {
-	// Test that PreProcess() finds words for preprocessing them and returns a new string
+	// Test that PreProcess() finds words for preprocessing
+	// and returns a new string
 	orig := "I dont think so."
 
 	parsed := ParseInput(orig)
@@ -57,7 +58,8 @@ func TestPreProcess(t *testing.T) {
 }
 
 func TestPostProcess(t *testing.T) {
-	// Test that PreProcess() finds words for preprocessing them and returns a new string
+	// Test that PreProcess() finds words for postprocessing
+	// and returns a new string
 	orig := "I love it when you quote shakespeare."
 
 	parsed := ParseInput(orig)
@@ -71,7 +73,18 @@ func TestPostProcess(t *testing.T) {
 }
 
 func TestFindSynonym(t *testing.T) {
+	// Test that PreProcess() finds synonyms for preprocessing
+	// and returns a new string with the first word in the synonym list
+	orig := "What you want and what you need."
 
+	parsed := ParseInput(orig)
+
+	synond := Synonymize(parsed)
+
+	result := []string{"what", "you", "desire", "and", "what", "you", "desire"}
+	if !reflect.DeepEqual(synond, result) {
+		t.Errorf("Error with post-processing. Returned string (%v) did not match expected result (%v).", synond, result)
+	}
 }
 
 func TestFindKeyword(t *testing.T) {
